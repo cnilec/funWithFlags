@@ -1,0 +1,53 @@
+<html>
+	<head>
+	<title>Fun With Flags</title>	
+	<style>
+		.img-container {
+			text-align: center;
+		}
+	</style>	
+	</head>
+	
+	<audio id="RightWAV">
+		<source src="data/fwf/sound/right.wav" type="audio/wav">
+	</audio>		
+	
+	<audio id="WrongWAV">
+		<source src="data/fwf/sound/wrong.wav" type="audio/wav">
+	</audio>
+
+	<body>
+			<h1 style="color:red;font-family:Verdana, Geneva, Tahoma, sans-serif;font-size:40px;text-align:center;"> 
+				Fun With FLAGS
+			</h1>
+
+			<br><br>
+			
+		<div class="img-container">
+			
+			<p id="score", style="font-size: 48px;">Score = 0/0</p>
+			<br><br>
+
+			<img src= "data/fwf/gifs/India.gif" alt="Flag image" id="flagpic">
+			
+			<br><br>
+			<br><br>
+			
+			<div>
+				<button disabled="true", onclick="displayResult(1)", id="option1", style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
+				<button disabled="true", onclick="displayResult(2)", id="option2", style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
+				<button disabled="true", onclick="displayResult(3)", id="option3", style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
+				<button disabled="true", onclick="displayResult(4)", id="option4", style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
+			</div>
+
+			<br><br>
+			<br><br>
+			
+			<button onclick="displayFlag()", id="btnNext", style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black;border:black">Start</button>
+
+		</div>
+
+	<script src="./data/fwf/js/main.js"></script>
+
+	</body>
+</html>
