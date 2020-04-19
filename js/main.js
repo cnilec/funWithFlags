@@ -4,40 +4,113 @@
 			var rightAns = 0;
 			var score = 0;
 			var total = 0;
-			
+			var timeLimit = 60000;
+			var timerUP;
+			var mode;
+
+			document.getElementById("option1").style.visibility = "hidden";
+			document.getElementById("option2").style.visibility = "hidden";
+			document.getElementById("option3").style.visibility = "hidden";
+			document.getElementById("option4").style.visibility = "hidden";
+
+            document.getElementById("printScore").style.visibility = "hidden";
+            document.getElementById("timer").style.visibility = "hidden";
+            document.getElementById("flagPic").style.visibility = "hidden";
+            document.getElementById("btnNext").style.visibility = "hidden";
+
+			function setMode(o) {
+
+            var btnScoreDel = document.getElementById("btnScore");
+            var btnLearnDel = document.getElementById("btnLearn");
+            var txtTimerDel = document.getElementById("timer");
+
+
+			switch (o) {
+
+                case "learn":
+            	    mode = "learn";
+            	    txtTimerDel.remove();
+            	    document.getElementById("printScore").innerText = "Score = 0/0";
+                    document.getElementById("printScore").style.visibility = "visible";
+                    document.getElementById("flagPic").style.visibility = "visible";
+                    document.getElementById("btnNext").style.visibility = "visible";
+            	    break;
+            	case "score":
+            		mode = "score";
+                    document.getElementById("printScore").style.visibility = "visible";
+                    document.getElementById("timer").style.visibility = "visible";
+                    document.getElementById("flagPic").style.visibility = "visible";
+                    document.getElementById("btnNext").style.visibility = "visible";
+            		break;
+			    }
+
+			 btnScoreDel.remove();
+			 btnLearnDel.remove();
+
+			}
+
+
 			function displayFlag() {
 
 				var n = Math.floor((Math.random()*(flagImages.length))+0);
-    			var flagElement = document.getElementById("flagpic");
+    			var flagElement = document.getElementById("flagPic");
     
 				document.getElementById("option1").disabled = false;
 				document.getElementById("option2").disabled = false;
 				document.getElementById("option3").disabled = false;
 				document.getElementById("option4").disabled = false;
+				document.getElementById("option1").style.visibility = "visible";
+                document.getElementById("option2").style.visibility = "visible";
+                document.getElementById("option3").style.visibility = "visible";
+                document.getElementById("option4").style.visibility = "visible";
+                document.getElementById("printScore").style.visibility = "visible";
+                document.getElementById("flagPic").style.visibility = "visible";
+                document.getElementById("btnNext").style.visibility = "visible";
 				document.getElementById("option1").style.backgroundColor="white";
 				document.getElementById("option2").style.backgroundColor="white";
 				document.getElementById("option3").style.backgroundColor="white";
 				document.getElementById("option4").style.backgroundColor="white";
+
+                if (mode == "score") {
+                    document.getElementById("timer").style.visibility = "visible";
+                }
+
+                if (document.getElementById("btnNext").innerText=="Re Start") {
+                    location.reload(true);
+                }
 
 			    if (document.getElementById("btnNext").innerText=="Skip") {
 					updateScore(0,1);
 					document.getElementById("WrongWAV").play();
     			}
 
+                if (document.getElementById("btnNext").innerText=="Start" && mode == "score") {
+                    timerUp = setInterval(function(){tickTimer()}, 1000);
+                }
+
     			flagElement.src=imgDir+flagImages[n];
     			document.getElementById("btnNext").innerText = "Skip";
+
+    			if (mode == "score") {
+    			    document.getElementById("btnNext").style.visibility = "hidden";
+    			}
     
 				displayOptions(n);
-			}
+
+             }
 
 			function displayResult(p){
 
 				if (p==rightAns) {
 					document.getElementById("RightWAV").play();
 					buttonGreen(p);
+					document.body.style.backgroundColor = "green";
+					setTimeout(function(){ document.body.style.backgroundColor = "white"; }, 100);
 					updateScore(1,1);
 				} else {
 					buttonRed(p);
+					document.body.style.backgroundColor = "red";
+					setTimeout(function(){ document.body.style.backgroundColor = "white"; }, 100);
 					document.getElementById("WrongWAV").play();
 					buttonGreen(rightAns);
 					updateScore(0,1)
@@ -47,6 +120,10 @@
 				document.getElementById("option3").disabled = true;
 				document.getElementById("option4").disabled = true;
 				document.getElementById("btnNext").innerText = "Next";
+
+				if (mode == "score") {
+				    displayFlag();
+				}
 			}
 	
 			function displayOptions(n) {
@@ -122,5 +199,34 @@
 			function updateScore(s,t){
 				score = score+s;
 				total = total+t;
-				document.getElementById("score").innerText = "Score: "+score+" / "+total;
+				success = score*100/total;
+				speed = total/60;
+
+				if (mode == "score") {
+				    document.getElementById("printScore").innerText = "Score = "+score+" / "+total+" | Success  = "+success.toFixed()+"% | Speed = "+speed.toFixed(2)+"/sec";
+				} else {
+				    document.getElementById("printScore").innerText = "Score = "+score+" / "+total
+				}
+
 			}
+
+		    function tickTimer() {
+
+                var minutes = Math.floor((timeLimit % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeLimit % (1000 * 60)) / 1000);
+
+                timeLimit = timeLimit-1000;
+
+                document.getElementById("timer").innerHTML = minutes + ":" + seconds;
+
+                if (timeLimit <= 0) {
+                    clearInterval(timerUP);
+                    document.getElementById("timer").innerText = "Time UP"
+                    document.getElementById("btnNext").style.visibility = "visible";
+                    document.getElementById("btnNext").innerText = "Re Start"
+                    document.getElementById("option1").disabled = true;
+                    document.getElementById("option2").disabled = true;
+                    document.getElementById("option3").disabled = true;
+                    document.getElementById("option4").disabled = true;
+                }
+             }

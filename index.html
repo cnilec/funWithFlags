@@ -18,34 +18,34 @@
 
 	<body>
 			<h1 style="color:red;font-family:Verdana, Geneva, Tahoma, sans-serif;font-size:40px;text-align:center;"> 
-				Fun With FLAGS
+				Fun With FLAGs
 			</h1>
 
-			<br><br>
-			
-		<div class="img-container">
-			
-			<p id="score" style="font-size: 48px;">Score = 0/0</p>
-			<br><br>
+			<div class="img-container">
 
-			<img src= "gifs/India.gif" alt="Flag image" id="flagpic">
+				<button onclick="setMode('learn')" id="btnLearn" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black;border:black">Learn</button>
+				<button onclick="setMode('score')" id="btnScore" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black;border:black">Score</button>
+
+				<p id="printScore" style="font-size: 48px;">Score = 0/0 | Success = 0% | Speed = 0/sec</p>
+
+				<p id="timer" style="font-size: 54px; color: blue">How Many can you Do in 1 minute?</p>
+
+				<img src= "gifs/India.gif" alt="Flag image" id="flagPic">
 			
-			<br><br>
-			<br><br>
+				<br><br>
 			
-			<div>
-				<button onclick="displayResult(1)" id="option1" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
-				<button onclick="displayResult(2)" id="option2" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
-				<button onclick="displayResult(3)" id="option3" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
-				<button onclick="displayResult(4)" id="option4" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black"></button>
+				<div>
+					<button onclick="displayResult(1)" id="option1" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black" disabled="true"></button>
+					<button onclick="displayResult(2)" id="option2" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black" disabled="true"></button>
+					<button onclick="displayResult(3)" id="option3" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black" disabled="true"></button>
+					<button onclick="displayResult(4)" id="option4" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black" disabled="true"></button>
+				</div>
+
+				<br><br>
+			
+				<button onclick="displayFlag()" id="btnNext" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black;border:black">Start</button>
+
 			</div>
-
-			<br><br>
-			<br><br>
-			
-<button onclick="displayFlag()" id="btnNext" style="border-radius: 12px;font-size: 20px;padding: 14px 40px;text-align: center;color: black;border:black">Start</button>
-
-		</div>
 
 	<script src="./js/main.js"></script>
 
